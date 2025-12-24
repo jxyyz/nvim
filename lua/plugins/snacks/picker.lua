@@ -23,10 +23,8 @@ local keys = {
     {'<leader>fh', p("help"), desc = "Find help tags"},
     {'<leader>fP', p("pickers"), desc = "Find Snacks Picker sources"},
     {'<leader>fk', p("keymaps"), desc = "Find keymaps"},
-    -- TODO: rewrite for snacks
-    -- {'<leader>fc', builtin.treesitter, desc = "Find treesitter symbols"},
-    -- {'<leader>ft', vim.cmd.TodoTelescope, desc = "Find TODO comments"},
-
+    {'<leader>ft', p("todo_comments"), desc = "Find TODO comments"},
+    {'<leader>fc', p("treesitter"), desc = "Find treesitter symbols"},
 }
 
 return {opts=opts, keys=keys}

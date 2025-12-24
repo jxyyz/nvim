@@ -52,32 +52,45 @@
 --   return lsp_cfg.e({}, "servers")  -- Ładuje config.lsp.servers
 --
 
-local function create_extension_helper(_, base_path)
+local function create_extension_helper(_, base_path, module_key)
     local _cache = {}
-    
+
+    base_path = base_path or nil
+    module_key = module_key or "opts"
+
     local function load_module(name)
-        local module_name = base_path .. "." .. name
+        local module_name = name
+
+        if base_path ~= nil then
+            module_name = base_path .. "." .. module_name
+        end 
+
         if not _cache[module_name] then
             _cache[module_name] = require(module_name)
         end
         return _cache[module_name]
     end
-    
-    -- Merge multiple configuration sources
-    -- e(string)               - load module only
-    -- e(table, string, table) - merge starting table + module + extra table
-    -- e(table, string)        - merge starting table + module
-    -- e(table, table)         - merge two tables directly
-    local function e(otbl, etbl, extra)
-        if type(otbl) == "string" and not etbl and not extra then
-            otbl, etbl = {}, otbl
+
+    -- Merge multiple configuration sources (variadic)
+    -- Each argument can be:
+    --   - string: loaded as module via load_module(arg).opts
+    --   - table:  merged directly
+    -- Arguments are merged left-to-right; later values override earlier ones
+    -- Examples:
+    --   e("module")                      -> load module opts
+    --   e({base=1}, "module", {x=2})     -> merge base + module opts + extra
+    --   e("mod1", "mod2")                -> merge mod1 opts + mod2 opts
+    --   e({}, {a=1}, {b=2})              -> merge tables directly
+    local function e(...)
+        local result = {}
+        for i = 1, select("#", ...) do
+            local arg = select(i, ...)
+            local tbl = type(arg) == "string" and load_module(arg)[module_key] or arg
+            result = vim.tbl_deep_extend("force", result, tbl or {})
         end
-        if type(etbl) == "string" then etbl = load_module(etbl).opts end
-        local result = vim.tbl_deep_extend("force", otbl, etbl or {})
-        if extra then result = vim.tbl_deep_extend("force", result, extra) end
         return result
-    end
-    
+    end 
+
     -- Extract keys from module
     local function e_keys(module_name, default)
         return load_module(module_name).keys or default or {}

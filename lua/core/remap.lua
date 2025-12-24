@@ -45,6 +45,7 @@ map({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to black hole register 
 -- Disable Ex mode
 map("n", "Q", "<nop>", { desc = "Disable Ex mode" })
 
+-- QUICKFIX & LOCATION LIST
 map("n", "<A-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix item (centered)" })
 map("n", "<A-j>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item (centered)" })
 map("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location list item (centered)" })
@@ -85,6 +86,12 @@ map("n", "<S-j>", ":resize +5<CR>",
     { silent = true, desc = "Increase window height" })
 map("n", "<S-k>", ":resize -5<CR>",
     { silent = true, desc = "Decrease window height" })
+
+-- Focus/zen/dim
+map("n", "<leader>zz", function()
+    local en = not Snacks.dim.enabled
+    if en then Snacks.dim.enable() else Snacks.dim.disable() end
+end, {desc = "Toggle dim mode"})
 
 -- TODO:
 -- git hunks remaps

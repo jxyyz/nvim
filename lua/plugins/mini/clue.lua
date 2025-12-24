@@ -76,6 +76,8 @@ local opts = {
         { mode = 'n', keys = '<leader>lw', desc = '+Workspace' },
         { mode = 'n', keys = '<leader>lt', desc = '+Toggles' },
 
+        { mode = 'n', keys = '<leader>z',  desc = '+Zen/Focus' },
+
 
         clue.gen_clues.square_brackets(),
         clue.gen_clues.builtin_completion(),

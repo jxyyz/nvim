@@ -1,6 +1,6 @@
-local eh = require("lib.ext"):setup("plugins.snacks")
-local e, e_keys  = eh.e, eh.e_keys
-local enabled, disabled = {enabled = true }, { enabled = false }
+local eh                = require("lib.ext"):setup("plugins.snacks")
+local e, e_keys         = eh.e, eh.e_keys
+local enabled, disabled = { enabled = true }, { enabled = false }
 
 -- merge keys
 local function mkeys(modules, extra_keys)
@@ -21,8 +21,8 @@ local P = {
     lazy = false,
     opts = {
         picker = e(enabled, "picker"),
-        dim = { 
-            enabled = true, 
+        dim = {
+            enabled = true,
             animate = {
                 enabled = true,
                 easying = "inOutSine",
@@ -34,14 +34,13 @@ local P = {
         indent = { enabled = false },
         image = { enabled = true },
     },
-    keys = mkeys({'picker'}),
+    keys = mkeys({ 'picker' }),
 
     -- init = function()
-        --     local Snacks = require("snacks")
-        --     Snacks.dim()
-        -- end,
-    }
+    --     local Snacks = require("snacks")
+    --     Snacks.dim()
+    -- end,
+}
 
 
-    return P
-
+return P
