@@ -31,6 +31,11 @@
 
 local P = {
     {
+        "lowitea/aw-watcher.nvim",
+        event = "VeryLazy",
+        opts = {},
+    },
+    {
         'j-hui/fidget.nvim',
         lazy = false,
         opts = {
