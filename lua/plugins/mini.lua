@@ -10,6 +10,8 @@ local P = {
         require("mini.surround").setup()
         require("mini.clue").setup(e("clue"))
         require("mini.animate").setup(e("animate"))
+        require("mini.icons").setup()
+        MiniIcons.mock_nvim_web_devicons()
     end,
 } 
 

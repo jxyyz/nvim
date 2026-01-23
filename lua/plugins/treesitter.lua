@@ -8,7 +8,7 @@ local P = {
         ts.install({
             "lua", "vim", "vimdoc", "query",
             "python", "rust", "go", "javascript", "typescript", "bash", "fish",
-            "yaml", "json",
+            "yaml", "json", "toml",
             "markdown", "markdown_inline", "html", "latex", "typst",
             "mark",
         }):wait(60000)

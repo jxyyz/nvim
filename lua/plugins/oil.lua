@@ -20,7 +20,6 @@ local P = {
 		watch_for_changes = true,
 	},
 	-- Optional dependencies
-	dependencies = { "nvim-tree/nvim-web-devicons" },
 	keys = remap,
 }
 
