@@ -44,7 +44,6 @@ local P = {
                 window = {
                     x_padding = 4,
                     y_padding = 3,
-                    avoid = { "no-neck-pain" },
                 },
             },
         },
@@ -57,7 +56,7 @@ local P = {
         opts = {
             width = 120,
             autocmds = {
-                enableOnVimEnter = true,
+                enableOnVimEnter = "safe",
                 skipEnteringNoNeckPainBuffer = true,
             },
         },

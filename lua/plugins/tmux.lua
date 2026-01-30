@@ -1,13 +1,14 @@
 --  This is the function that propagates `motion`, ignoring buffers of specified type
 local function move(motion)
-    local ignore_filetypes = {"snacks_layout_box", "snacks_picker_input", "snacks_picker_list",}
+    local ignore_filetypes = { "snacks_layout_box", "snacks_picker_input", "snacks_picker_list",
+        "codediff-explorer" }
 
     return function()
         local buftype = "nofile"
         vim.g.last_pane = vim.fn.win_getid()
         vim.cmd(motion)
         if vim.bo.buftype ~= buftype
-          or vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
+            or vim.tbl_contains(ignore_filetypes, vim.bo.filetype) then
             vim.g.last_pane = vim.fn.win_getid()
         else
             while vim.bo.buftype == buftype do
@@ -32,10 +33,10 @@ local P = {
         "TmuxNavigatePrevious",
     },
     keys = {
-        { "<c-h>", move("TmuxNavigateLeft") },
-        { "<c-j>", move("TmuxNavigateDown") },
-        { "<c-k>", move("TmuxNavigateUp") },
-        { "<c-l>", move("TmuxNavigateRight") },
+        { "<c-h>",  move("TmuxNavigateLeft") },
+        { "<c-j>",  move("TmuxNavigateDown") },
+        { "<c-k>",  move("TmuxNavigateUp") },
+        { "<c-l>",  move("TmuxNavigateRight") },
         { "<c-\\>", move("TmuxNavigatePrevious") },
     },
     init = function()
