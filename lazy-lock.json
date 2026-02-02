@@ -20,7 +20,7 @@
   "mason.nvim": { "branch": "main", "commit": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800" },
   "mini.nvim": { "branch": "main", "commit": "6bd3a01aaf7d248aea1b78aacdd5d44bffa002c1" },
   "nightfox.nvim": { "branch": "main", "commit": "ba47d4b4c5ec308718641ba7402c143836f35aa9" },
-  "no-neck-pain.nvim": { "branch": "main", "commit": "434fed70b1ee553f8f27e6da7b3899f71b3c6f99" },
+  "no-neck-pain.nvim": { "branch": "main", "commit": "d871043474c06995c062413c91c987d0cb602632" },
   "nui.nvim": { "branch": "main", "commit": "de740991c12411b663994b2860f1a4fd0937c130" },
   "nvim-ansible": { "branch": "main", "commit": "bba61168b7aef735e7f950fdfece5ef6c388eacf" },
   "nvim-lightbulb": { "branch": "master", "commit": "aa3a8b0f4305b25cfe368f6c9be9923a7c9d0805" },

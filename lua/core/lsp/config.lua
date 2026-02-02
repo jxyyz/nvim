@@ -1,13 +1,6 @@
 -- LSP config
 local M = {}
 
--- TODO: LSP config for ansible
--- TODO: LSP config for python
--- TODO: LSP config for rust
--- TODO: LSP config for go
--- TODO: LSP config for bash
--- TODO: LSP config for fish
-
 M.features = {
     inlay_hints = {
         enabled = false,

@@ -5,7 +5,6 @@
 --
 -- TODO: treesitter setup
 -- TODO: https://oneofone.dev/post/securing-neovim-with-firejail/
--- TODO: mini.starter
 -- TODO: mini.ai
 -- TODO: TreeSJ
 -- TODO: git signs / blame / diff
@@ -14,9 +13,9 @@
 -- TODO: other.nvim
 -- TODO: dap
 -- TODO: undotree
--- TODO: harpoon/chosen
 
 
+-- DONE: arrow (canceled: harpoon/chosen)
 -- DONE: quicker
 -- DONE: tmux - sesh
 -- DONE: fancy notifications
@@ -28,6 +27,7 @@
 -- CANCELED: plugin for tip of the day
 -- CANCELED: consider using detour.nvim
 -- CANCELED: consider nvim ufo
+-- CANCELED: mini.starter
 
 local P = {
     {

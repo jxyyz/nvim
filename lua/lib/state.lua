@@ -1,4 +1,94 @@
--- lib/state.lua
+-- Keyed state registry with lifecycle management.
+--
+-- Problem:
+--   Sometimes it's needed to manage some state across different usecases of
+--   Neovim. There are buffer variables (vim.b), but they are wrappers over
+--   Vimscript variables — Lua values are converted to Vimscript types on each
+--   access, losing reference identity, functions, and metatables.
+--
+-- Solution:
+--   Lua-native state tied to a scope (buffer, window, project) — created
+--   lazily, keyed per-scope, and cleaned up automatically when the scope is
+--   gone.
+--
+-- How it works:
+--   1. Define a SCHEMA — a table template with properties and methods.
+--   2. Call create(schema, opts) — you get a REGISTRY.
+--   3. The registry lazily creates INSTANCES — each instance is a deep copy
+--      of the schema, keyed by whatever you choose (bufnr, winid, path, ...).
+--   4. Functions in the schema are auto-bound: fn(self, key, ...) so methods
+--      always know which scope they belong to, without the caller passing it.
+--   5. Instances are accessed transparently via registry[key] or registry.prop.
+--
+-- Quick start — counter per buffer:
+--
+--   local state = require("lib.state")
+--   local counters = state.buffer({ count = 0 })
+--
+--   counters.count              -- get count for current buffer
+--   counters[bufnr].count       -- get count for specific buffer
+--   counters.count = 5          -- set count for current buffer
+--
+-- API:
+--
+--   create(schema, opts)
+--     Core factory. Returns a registry backed by schema.
+--     schema       — table template, deep-copied per instance
+--     opts.default_key  — fun(): any — returns current scope key (e.g. bufnr)
+--     opts.lifecycle    — optional lifecycle hooks (see below)
+--     opts.defaults     — optional fun(key): table — fallback values when nil
+--
+--   Presets (convenience wrappers over create()):
+--     buffer(schema, opts?)   — keyed by bufnr, auto-cleans on BufWipeout/BufUnload
+--     window(schema, opts?)   — keyed by winid, auto-cleans on invalid window
+--     tab(schema, opts?)      — keyed by tabpage id, auto-cleans on invalid tabpage
+--     project(schema, opts?)  — keyed by project root path, persistent (no auto-cleanup)
+--     global(schema)          — single instance, no keying
+--
+--   Lifecycle hooks (opts.lifecycle):
+--     on_create(key, instance)  — after new instance is created; can return replacement
+--     on_remove(key, instance)  — before instance is removed from cache
+--     is_valid(key)             — returns boolean; invalid keys trigger lazy cleanup
+--     validate_on               — list of autocmd events that trigger cache sweep
+--
+--   Access patterns:
+--     registry[key]       — get instance for explicit key
+--     registry.prop       — get property from current scope's instance
+--     registry.prop = val — set property on current scope's instance
+--     registry.init(key)  — explicitly create entry (alias for _get)
+--
+--   Internal methods:
+--     _get(key), _remove(key), _keys(), _clear(), _sweep()
+--
+-- Custom state example (not limited to Neovim scopes):
+--
+--   local sessions = state.create({ active = false, data = {} }, {
+--       default_key = function() return get_current_session_id() end,
+--       lifecycle = {
+--           is_valid = function(id) return is_session_alive(id) end,
+--           on_create = function(id, inst) log("session created:", id) end,
+--       },
+--   })
+--
+-- Real-world example (from lib/lsp/features/):
+--
+--   -- Per-buffer LSP feature state
+--   self.buffer = state.buffer(schema, {
+--       on_create = function(bufnr, instance)
+--           instance:_auto_apply(bufnr)
+--       end,
+--   })
+--
+--   -- In remap:
+--   local buff = features.buffer[bufnr]
+--   buff.inlay_hints:toggle()
+--
+-- Schema function binding:
+--   Functions defined in the schema receive (self, key, ...). The key is
+--   injected automatically by deep_copy_with_binding, so methods always know
+--   their scope. Example: a schema method toggle(self, bufnr) — when called
+--   as instance:toggle(), bufnr is filled in from the instance's key.
+--
 local util = require("lib.util")
 local M = {}
 

@@ -49,7 +49,7 @@
 --   -- lsp servers configuration
 --   local lsp_cfg = require("lib.utils.ext"):setup("config.lsp")
 --   
---   return lsp_cfg.e({}, "servers")  -- Ładuje config.lsp.servers
+--   return lsp_cfg.e({}, "servers")  -- loads config.lsp.servers
 --
 
 local function create_extension_helper(_, base_path, module_key)
@@ -58,6 +58,8 @@ local function create_extension_helper(_, base_path, module_key)
     base_path = base_path or nil
     module_key = module_key or "opts"
 
+    -- WARN: looks like loaded  module cache is a native Lua thing
+    -- this code may be unnecessary
     local function load_module(name)
         local module_name = name
 
