@@ -95,7 +95,29 @@ local P = {
                 events = {"CursorHold"} ,
             },
         }
-    }
+    },
+    {
+        "Hashino/doing.nvim",
+        cmd = "Do",
+        config = function()
+            local doing = require("doing")
+            doing.setup {
+                doing_prefix = "   ",
+                ignored_buffers = { "md", "dapui_scopes", "dapui_stacks", "dapui_watches", "dapui_repl", "dap-repl", "dapui_breakpoints", "dapui_console" },
+                store = {
+                    file_name = ".tasks",
+                    sync_tasks = true,
+                },
+            }
+        end,
+        keys = {
+            { "<leader>da", function() require("doing").add() end,          desc = "Add new task" },
+            { "<leader>dA", function() require("doing").add(nil, true) end, desc = "Add new task (force)" },
+            { "<leader>dn", function() require("doing").done() end,         desc = "Mark task as done" },
+            { "<leader>de", function() require("doing").edit() end,         desc = "Edit task" },
+        },
+    },
+
 
 }
 

@@ -55,6 +55,9 @@ local opts = {
         { mode = 'n', keys = '<leader>f',  desc = '+Picker' },
         { mode = 'n', keys = '<leader>w',  desc = '+Session' },
 
+        -- Doing.nvim
+        { mode = 'n', keys = '<leader>d',  desc = '+Doing' },
+
         -- Moving lines and selection
         { mode = 'n', keys = '<leader>m',  desc = '+VisMove' },
         { mode = 'n', keys = '<leader>mj', postkeys = '<leader>m' },

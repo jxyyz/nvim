@@ -1,5 +1,7 @@
 local map = vim.keymap.set
 
+local cmdheight = vim.o.cmdheight 
+
 -- Set leader key to space
 vim.g.mapleader = " "
 
@@ -40,7 +42,7 @@ map("n", "<C-u>", "<C-u>zz", { desc = "Scroll up (centered)" })
 
 -- Advanced paste operations
 map("x", "<leader>p", [["_dP]], { desc = "Paste over selection (preserve register)" })
-map({ "n", "v" }, "<leader>d", [["_d]], { desc = "Delete to black hole register (preserve clipboard)" })
+map({ "n", "v" }, "<leader>D", [["_d]], { desc = "Delete to black hole register (preserve clipboard)" })
 
 -- Disable Ex mode
 map("n", "Q", "<nop>", { desc = "Disable Ex mode" })
@@ -75,17 +77,21 @@ map("n", "<leader>ao", ":only<CR>", { desc = "Close all windows except current" 
 map("n", "<leader>al", ":call lens#toggle()<CR>", { desc = "Toggle lens (auto-resize)" })
 map("n", "<leader>ar", function()
     vim.cmd("NoNeckPainResize 120")
+    vim.o.cmdheight = cmdheight
 end, { desc = "Reset window layout"})
 
 -- Window resize operations
-map("n", "<S-h>", ":vertical resize -5<CR>",
-    { silent = true, desc = "Decrease window width" })
-map("n", "<S-l>", ":vertical resize +5<CR>",
-    { silent = true, desc = "Increase window width" })
-map("n", "<S-j>", ":resize +5<CR>",
-    { silent = true, desc = "Increase window height" })
-map("n", "<S-k>", ":resize -5<CR>",
-    { silent = true, desc = "Decrease window height" })
+local function res(s)
+    return function()
+        vim.cmd(s)
+        vim.o.cmdheight = cmdheight
+    end
+end
+
+map("n", "<S-j>", res("resize +5"), { silent = true, desc = "Increase window height" })
+map("n", "<S-k>", res("resize -5"), { silent = true, desc = "Decrease window height" })
+map("n", "<S-h>", res("vertical resize -5"), { silent = true, desc = "Decrease window width" })
+map("n", "<S-l>", res("vertical resize +5"), { silent = true, desc = "Increase window height" })
 
 -- Focus/zen/dim
 map("n", "<leader>zz", function()
