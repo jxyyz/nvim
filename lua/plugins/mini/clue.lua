@@ -49,8 +49,9 @@ local opts = {
 
     clues = {
         -- General
-        { mode = 'n', keys = '<leader>a',  desc = '+Window +Oil' },
+        { mode = 'n', keys = '<leader>a',  desc = '+Window +Oil +Wiremux' },
         { mode = 'n', keys = '<leader>aa', desc = '+Oil' },
+        { mode = 'n', keys = '<leader>aw', desc = '+Wiremux' },
         { mode = 'n', keys = '<leader>b',  desc = '+Buffer' },
         { mode = 'n', keys = '<leader>f',  desc = '+Picker' },
         { mode = 'n', keys = '<leader>w',  desc = '+Session' },

@@ -10,11 +10,12 @@ M.lazy_state = M.root .. "/lazy-state.json"
 
 M.lazypath = M.plugin_dir .. "/lazy.nvim"
 
-vim.fn.mkdir(plugin_dir, "p")
+
+vim.fn.mkdir(M.plugin_dir, "p")
 
 if not (vim.uv or vim.loop).fs_stat(M.lazypath) then
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+    local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, M.lazypath })
     if vim.v.shell_error ~= 0 then
         vim.api.nvim_echo({
             { "Failed to clone lazy.nvim:\n", "ErrorMsg" },

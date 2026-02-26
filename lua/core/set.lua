@@ -60,3 +60,6 @@ vim.opt.sessionoptions = {
 vim.opt.virtualedit = "block"
 vim.opt.wildmode = "longest:full,full"
 vim.opt.formatoptions = "jcroqlnt"
+
+vim.opt.cmdheight = 1
+vim.g.default_cmdheight = vim.o.cmdheight

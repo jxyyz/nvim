@@ -1,5 +1,13 @@
+local util = require("lib.util")
+
 -- GENERAL GROUP
 local general_group = vim.api.nvim_create_augroup("General", { clear = true })
+
+-- reset view on certain events
+vim.api.nvim_create_autocmd("WinResized", {
+    group = general_group,
+    callback = util.debounce(util.reset_view)
+})
 
 -- highgligh on yank
 vim.api.nvim_create_autocmd("TextYankPost", {

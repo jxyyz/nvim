@@ -1,6 +1,5 @@
+local util = require("lib.util")
 local map = vim.keymap.set
-
-local cmdheight = vim.o.cmdheight 
 
 -- Set leader key to space
 vim.g.mapleader = " "
@@ -75,10 +74,7 @@ map("n", "<leader>as", ":split<CR>", { desc = "Split window horizontally" })
 map("n", "<leader>ac", ":q<CR>", { desc = "Close current window" })
 map("n", "<leader>ao", ":only<CR>", { desc = "Close all windows except current" })
 map("n", "<leader>al", ":call lens#toggle()<CR>", { desc = "Toggle lens (auto-resize)" })
-map("n", "<leader>ar", function()
-    vim.cmd("NoNeckPainResize 120")
-    vim.o.cmdheight = cmdheight
-end, { desc = "Reset window layout"})
+map("n", "<leader>ar", util.reset_view, { desc = "Reset window layout"})
 
 -- Window resize operations
 local function res(s)
