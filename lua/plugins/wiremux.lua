@@ -23,7 +23,7 @@ local P = {
             {
                 "<leader>awa",
                 function()
-                    w.send("/ask {input:Question}\n\ncontext:\n{this}")
+                    w.send("/ask {input:Question}\n\ncontext:\n{this}", {submit=true, target="cc"})
                 end,
                 mode = { "n", "x" },
                 desc = "Ask"

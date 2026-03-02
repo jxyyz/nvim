@@ -10,7 +10,7 @@ local P = {
             "python", "rust", "go", "javascript", "typescript", "bash", "fish",
             "yaml", "json", "toml",
             "markdown", "markdown_inline", "html", "latex", "typst",
-            "mark",
+            "vhs",
         }):wait(60000)
 
         vim.api.nvim_create_autocmd("FileType", {

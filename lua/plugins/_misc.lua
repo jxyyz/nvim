@@ -92,7 +92,7 @@ local P = {
         opts = {
             autocmd = {
                 enabled = true,
-                events = {"CursorHold"} ,
+                events = { "CursorHold" },
             },
         }
     },
