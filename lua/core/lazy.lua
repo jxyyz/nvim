@@ -22,6 +22,7 @@ require("lazy").setup({
     dev = {
         path = "~/repos/nvim-forks",
         patterns = {"jxyyz"},
+        fallback = true,
     },
     defaults = { lazy = true },
 })

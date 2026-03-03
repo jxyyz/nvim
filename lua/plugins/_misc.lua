@@ -73,6 +73,7 @@ local P = {
                 "nerdtree", "tagbar", "DiffViewFiles", "dapui_watches", "dapui_scopes",
                 "dapui_stacks", "dapui_breakpoints", "dapui_console", "dapui_repl",
                 "snacks_layout_box", "snacks_picker_input", "snacks_picker_list",
+                "codediff-explorer"
             })
             vim.api.nvim_set_var("lens#disabled_buftypes", {
                 "nofile", "nowrite", "quickfix", "terminal", "prompt",
