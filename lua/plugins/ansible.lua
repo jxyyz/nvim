@@ -1,12 +1,9 @@
 local P = {
-    {
-        "pearofducks/ansible-vim",
-        ft = { "yaml", "yaml.ansible" },
-    },
-    {
-        'mfussenegger/nvim-ansible',
-        ft = { 'yaml', 'yaml.ansible' }
-    },
+    "pearofducks/ansible-vim",
+    ft = { "yaml", "ansible" },
+    config = function()
+        require("ansible").setup()
+    end,
 }
 
 return P

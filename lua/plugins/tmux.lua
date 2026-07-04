@@ -46,7 +46,7 @@ local P = {
     config = function()
         local group = vim.api.nvim_create_augroup("TmuxNavigator", { clear = true })
         vim.api.nvim_create_autocmd(
-            { "VimEnter", "FocusGained", "TabEnter" },
+            { "VimEnter", "FocusGained" },
             {
                 group = group,
                 pattern = "*",

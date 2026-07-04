@@ -1,21 +1,21 @@
 vim.filetype.add({
   pattern = {
-    ['.*/ansible/.*%.ya?ml'] = 'yaml.ansible',
-    ['.*/inventory/.*%.ya?ml'] = 'yaml.ansible',
-    ['.*/inventories/.*%.ya?ml'] = 'yaml.ansible',
-    ['.*inventory%.ya?ml'] = 'yaml.ansible',
-    ['.*playbook.*%.ya?ml'] = 'yaml.ansible',
-    ['.*site%.ya?ml'] = 'yaml.ansible',
-    ['.*/playbooks/.*%.ya?ml'] = 'yaml.ansible',
-    ['.*/molecule/.*%.ya?ml'] = 'yaml.ansible',
+    ['.*/ansible/.*%.ya?ml'] = 'ansible',
+    ['.*/inventory/.*%.ya?ml'] = 'ansible',
+    ['.*/inventories/.*%.ya?ml'] = 'ansible',
+    ['.*inventory%.ya?ml'] = 'ansible',
+    ['.*playbook.*%.ya?ml'] = 'ansible',
+    ['.*site%.ya?ml'] = 'ansible',
+    ['.*/playbooks/.*%.ya?ml'] = 'ansible',
+    ['.*/molecule/.*%.ya?ml'] = 'ansible',
   },
 
   extension = {
-    ansible = 'yaml.ansible',
+    ansible = 'ansible',
   },
 
   filename = {
-    ['requirements.yml'] = 'yaml.ansible',
-    ['galaxy.yml'] = 'yaml.ansible',
+    ['requirements.yml'] = 'ansible',
+    ['galaxy.yml'] = 'ansible',
   },
 })

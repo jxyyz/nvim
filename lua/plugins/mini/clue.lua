@@ -54,6 +54,7 @@ local opts = {
         { mode = 'n', keys = '<leader>aw', desc = '+Wiremux' },
         { mode = 'n', keys = '<leader>b',  desc = '+Buffer' },
         { mode = 'n', keys = '<leader>f',  desc = '+Picker' },
+        { mode = 'n', keys = '<leader>fg',  desc = '+GitPickers' },
         { mode = 'n', keys = '<leader>w',  desc = '+Session' },
 
         -- Doing.nvim
